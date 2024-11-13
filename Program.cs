@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Quiz.Data;
+using Quiz.Services;
 
 namespace Quiz
 {
@@ -19,6 +21,8 @@ namespace Quiz
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+            
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             var app = builder.Build();
 
